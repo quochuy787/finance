@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block content %}
+    <h2>Transaction History</h2>
+    <div class="transaction-history-container">
+        <table class="transaction-history-table">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Transaction Type</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.symbol }}</td>
+                    <td>{{ transaction.shares }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.transaction_type }}</td>
+                    <td>{{ transaction.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        /* General page styling */
+        .transaction-history-container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 900px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Table styling */
+        .transaction-history-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .transaction-history-table th,
+        .transaction-history-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .transaction-history-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .transaction-history-table td {
+            background-color: #f8f8f8;
+        }
+
+        .transaction-history-table tr:hover td {
+            background-color: #e9f7e9;
+        }
+
+        /* Price styling */
+        .transaction-history-table td:nth-child(3) {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Optional: Style for odd and even rows */
+        .transaction-history-table tr:nth-child(odd) td {
+            background-color: #f9f9f9;
+        }
+
+        .transaction-history-table tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .transaction-history-table th, .transaction-history-table td {
+                padding: 10px;
+            }
+
+            .transaction-history-table {
+                font-size: 14px;
+            }
+        }
+    </style>
+{% endblock %}

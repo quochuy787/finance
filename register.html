@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-lg p-5" style="max-width: 400px; width: 100%;">
+            <h2 class="text-center mb-4">Create Account</h2>
+            <form action="/register" method="post">
+                <!-- Username -->
+                <div class="mb-3">
+                    <input autocomplete="off" class="form-control form-control-lg" name="username" placeholder="Username" type="text" required>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <input autocomplete="new-password" class="form-control form-control-lg" name="password" placeholder="Password" type="password" required>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <input autocomplete="new-password" class="form-control form-control-lg" name="confirmation" placeholder="Confirm Password" type="password" id="confirm-password" required>
+                </div>
+
+                <!-- Show Password Checkbox -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="show-password" class="form-check-input">
+                    <label for="show-password" class="form-check-label">Show Password</label>
+                </div>
+
+                <!-- Register Button -->
+                <div class="text-center">
+                    <button class="btn btn-primary btn-lg w-100" type="submit">Register</button>
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a href="/login" class="text-muted">Already have an account? Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to toggle password visibility
+        const showPasswordCheckbox = document.getElementById('show-password');
+        const passwordField = document.getElementsByName('password')[0];
+        const confirmPasswordField = document.getElementById('confirm-password');
+
+        showPasswordCheckbox.addEventListener('change', function() {
+            // Toggle between password and text
+            const passwordType = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.type = passwordType;
+            confirmPasswordField.type = passwordType;
+        });
+    </script>
+{% endblock %}

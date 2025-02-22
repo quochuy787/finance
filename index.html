@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        /* Header Styles */
+        h1 {
+            text-align: center;
+            padding-top: 40px;
+            font-size: 2.5rem;
+            color: #4CAF50; /* Color for title */
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            text-align: center;
+            color: #28a745; /* Light green for portfolio title */
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #28a745;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 10px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Container for Description */
+        .intro-container {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-container h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .intro-container p {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Table Styles */
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        /* Button Styles */
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 20px;
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Your Portfolio</h1>
+    <div class="intro-container">
+        <h2>Welcome to Your Investment Dashboard</h2>
+        <p>Your portfolio gives you a clear view of your stock holdings, cash balance, and total portfolio value.
+            Monitor your investments, check stock prices, and buy or sell shares directly from here.
+            Manage your portfolio effectively to reach your financial goals.</p>
+    </div>
+
+    <h2>Portfolio Overview</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.shares }}</td>
+                <td>{{ usd(stock.price) }}</td> <!-- Format the price -->
+                <td>{{ usd(stock.shares * stock.price) }}</td> <!-- Format the total value -->
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No stocks in portfolio</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <h3>Cash: {{ usd(cash) }}</h3> <!-- Format the cash value -->
+    <h3>Total Portfolio Value: {{ usd(total_value) }}</h3> <!-- Format the total value -->
+
+    <br>
+    <!-- Buttons for navigation -->
+    <div class="text-center">
+        <a href="/buy" class="button">Buy More</a>
+        <a href="/logout" class="button">Log Out</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 C$50 Finance. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

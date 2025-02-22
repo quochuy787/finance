@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%; border-radius: 12px;">
+            <h2 class="text-center mb-4 text-primary">Sell Your Stocks</h2>
+            <form action="/sell" method="post">
+                <!-- Select Stock Symbol -->
+                <div class="mb-3">
+                    <label for="symbol" class="form-label">Stock Symbol:</label>
+                    <select name="symbol" id="symbol" class="form-select form-select-lg" required>
+                        <option value="" disabled selected>Select a stock</option>
+                        {% for stock in stocks %}
+                            <option value="{{ stock['symbol'] }}" data-shares="{{ stock['shares'] }}">{{ stock['symbol'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Enter Number of Shares -->
+                <div class="mb-3">
+                    <label for="shares" class="form-label">Shares:</label>
+                    <input type="number" name="shares" id="shares" class="form-control form-control-lg" min="1" required>
+                </div>
+
+                <!-- Sell Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-danger btn-lg">Sell Stock</button>
+                </div>
+            </form>
+
+            <!-- Back to Portfolio Link -->
+            <div class="text-center mt-3">
+                <a href="/portfolio" class="text-muted">Back to Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('symbol').addEventListener('change', function() {
+            // Get the selected stock symbol
+            const selectedStockSymbol = this.value;
+
+            // Find the number of shares available for the selected stock
+            const selectedStockOption = this.options[this.selectedIndex];
+            const availableShares = selectedStockOption.getAttribute('data-shares');
+
+            // Update the max value of the shares input to prevent exceeding the available shares
+            const sharesInput = document.getElementById('shares');
+            sharesInput.setAttribute('max', availableShares);
+            sharesInput.value = Math.min(sharesInput.value, availableShares);
+        });
+    </script>
+{% endblock %}

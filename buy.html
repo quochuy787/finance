@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stocks
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="text-center my-4">Buy Stocks</h1>
+        <div class="card shadow-lg p-4">
+            <form action="/buy" method="POST">
+                <div class="mb-4">
+                    <label for="symbol" class="form-label">Stock Symbol:</label>
+                    <input type="text" id="symbol" name="symbol" class="form-control form-control-lg" placeholder="e.g., AAPL, TSLA" required>
+                </div>
+                <div class="mb-4">
+                    <label for="shares" class="form-label">Shares:</label>
+                    <input type="number" id="shares" name="shares" class="form-control form-control-lg" min="1" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Buy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        /* General container styling */
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the form labels and inputs */
+        .form-label {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .form-control {
+            font-size: 1.1rem;
+            padding: 10px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 12px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .btn-primary {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+        }
+    </style>
+{% endblock %}
